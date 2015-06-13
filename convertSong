@@ -1,0 +1,35 @@
+#!/bin/bash
+
+filename=$(basename "$1")
+extension="${filename##*.}"
+filename="${filename%.*}"
+
+echo "input file: $1 $filename"
+
+#Creating the new file name
+newExtension=".mp3"
+newFileName=$filename$newExtension
+
+echo $newFileName
+
+#Getting the number of dashes
+res="${filename//[^-]}"
+numberOfDashes=${#res}
+
+#Checking if proper number of dashes
+if [ $numberOfDashes -eq 1 ]
+then #Found the proper number of dashes
+  #Getting the artist name and song name
+  { read -r -d $'\0' artist; read -r -d $'\0' song; } < <(sed 's/.mp3$//; s/ - /\x00/' <<<"$newFileName"); 
+    echo a=$artist s=$song
+
+  #converting the file 
+  ffmpeg -i "$1" -acodec libmp3lame -ac 2 -ab 256k "$newFileName"
+
+  #Tagging the song
+  id3tool -t "$song" -r "$artist" "$newFileName"
+else
+  #Not 1 dash
+  echo "Error, incorrect number of dashes in input $1"
+fi
+
