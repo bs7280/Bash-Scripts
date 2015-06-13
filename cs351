@@ -1,0 +1,5 @@
+#!/bin/bash
+#opens up a terminal for fourier and a changes the directory to the location of my labs folder
+gnome-terminal --working-directory = ~/Dropbox/School/cs351/labs/labs/;
+#gnome-terminal;
+gnome-terminal -e "ssh bshaughn@fourier.cs.iit.edu";

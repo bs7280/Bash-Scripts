@@ -1,0 +1,37 @@
+#!/bin/bash
+#Script to CD to my private dropbox and open vim with the file name
+
+cd ~/Dropbox/Ubuntu/scripts;
+if [ -z "$1" && -z "$2"];
+then
+        echo "Error: You did not specify a file name and a file to fork from\n";
+else
+        #check if file exists as a script!!! I will add a sepearte bash script for editing bash scripts
+	if hash $2 2>/dev/null; then
+                echo "It exists already!"
+        else
+        	if [ -f ~/Dropbox/Ubuntu/scripts/$1 ]; then
+         	       cp $1 $2
+         	       vim $2;
+         	       echo "Are you sure you want to create this script? Enter Y for yes"
+         	       read user_input
+         	       if [ "$user_input" == "Y" ];
+         	       then
+         	               chmod 755 ~/Dropbox/Ubuntu/scripts/$2;
+         	               echo "Created Bash Script $2\n"
+         	       else
+         	               echo "Do you want to delete this script? Y for yes"
+         	               read user_input
+         	               if [ "$user_input" == "Y" ]; then
+         	                       echo "Deleting Script"
+         	                       rm ~/Dropbox/Ubuntu/scripts/$2
+         	               else
+         	                       echo "Exiting, but keeping script"
+         	               fi
+         	       fi
+		else 
+			echo "the script you are trying to fork from does not exist!"
+		fi
+        fi
+fi
+

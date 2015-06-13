@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#this script basically just calls a bunch of programs/scripts/calls that I want
+#to be run on startup.
+
+dropbox start &
+nm-applet &
+indicator-sound-switcher &

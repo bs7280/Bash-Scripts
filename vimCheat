@@ -1,0 +1,90 @@
+#!/bin/bash
+#script to print out a cheat sheet for when using vim.
+#as of right now, this version is likely just going to be very static. 
+
+echo "Vim Cheat Sheet"
+echo "--------------------------------------------------------------------------"
+echo ""
+echo "The Basics:"
+echo "i -> Insert Mode (Esc to return to normal mode)"
+echo "d -> Delete the char under the cursor"
+echo ":wq -> Save and quit"
+echo "dd -> delete and copy the current line"
+echo "p -> past"
+echo "hjkl cursor movement"
+echo ":help <command> -> show help for that command"
+
+echo ""
+
+echo "level 2"
+echo "Insert mode variations: "
+echo "a -> insert after the cursor"
+echo "o -> insert a new line after the current one"
+echo "Shift o -> insert a new line before the current one"
+echo "cw -> replace from the cursor to the end of a word"
+
+echo ""
+
+
+echo "Basic moves:"
+echo "0 -> goto first collumn"
+echo "^ go to first non blank charactar of the line"
+echo "$ -> go to end of the line"
+echo "g_ go to the last non blank charactar of the line"
+echo "/pattern -> search for a pattern"
+echo "P -> paste before position"
+echo "p -> paste after position"
+echo "yy -> copy current line"
+echo "u -> undo"
+echo "<Control + R> -> redo"
+
+echo ""
+
+echo "Loading/saving/quiting:"
+
+echo ":e <path/to/file/> -> open file"
+echo ":w save"
+echo ":saveas <Path/to/File>  save to <path/to/file>"
+echo ":x, :zz. :wq -> save and quit"
+echo ":q! -> quit without saving"
+
+echo ""
+echo "Better:"
+echo ". -> a dot will repeate the last command"
+echo "N<Command> ->repeat the command N times"
+
+echo ""
+echo "Stronger:"
+echo "<N>G -> Goto line N"
+echo "gg -> go to start of the file"
+echo "G -> Go to the start of the last line"
+echo "w -> go to the start of the following word"
+echo "e -> go to the end of this word"
+echo "W -> go the the start of the following word"
+echo "E -> go to the end of this word"
+echo "% -> Go to a coorespoinding (,{,[ bracket"
+echo "* -> go to next occurance of that word"
+echo "# -> go to previous occurance of that word"
+
+echo ""
+echo "VI Moves:"
+echo "<start position><command><end position>"
+echo "0y$ means copy from the start of the line to the end of the line"
+echo "ye means to yank from here to the end of the word"
+echo "y2/foo yank up to the second occurance of foo"
+
+echo ""
+echo "Vim Superpowers:"
+echo "Move on current line:"
+echo "0 -> got to collumn 0"
+echo "^ -> go to the first character on the line"
+echo "$ -> go to the last character on the line"
+echo "g_ -> go to the last character of the line"
+echo "fa -> go to the next occurance of the letter a on the line"
+echo "      after doing fa, use ; and , to go forwards and backwards searching for a"
+echo "t, -> go to just before the ,"
+echo "3fa find the 3rd occurance of a on the line"
+echo "F and T are like f and t but backwards"
+echo "dta -> remove everything up until the a"
+
+

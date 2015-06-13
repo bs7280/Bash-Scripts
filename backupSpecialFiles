@@ -1,0 +1,14 @@
+#!/bin/bash
+#This script will backup specific files like .vimrc/.bashrc etc... to dropbox
+#Files will be backed up to Dropbox/Ubuntu/dotfileBackup
+
+#backing up .vimrc and .vim folder
+cp ~/.vimrc ~/Dropbox/Ubuntu/dotfileBackup/vimrc
+cp -r ~/.vim/* ~/Dropbox/Ubuntu/dotfileBackup/vim/
+
+#backing up bashrc
+cp ~/.bashrc ~/Dropbox/Ubuntu/dotfileBackup/bashrc
+
+#backing up awesome config files
+cp -r ~/.config/awesome/* ~/Dropbox/Ubuntu/dotfileBackup/awesome/
+

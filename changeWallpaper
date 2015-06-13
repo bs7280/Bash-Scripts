@@ -1,0 +1,29 @@
+#!/bin/bash
+#takes the location of a file as a parameter and sets that image as the wallpaper for awesome
+#by moving it to the /.config/awesome/themes/default/ location and renaming it to wallpaper.png
+if [[ -f $1 ]] ;
+then
+	if  [[ $1 == *.png ]] ; then
+		#echo ".png"
+		cp $1 ~/.config/awesome/themes/default/
+	elif [[ $1 == *.jpg ]]
+		then
+		#echo ".jpg"
+		#FILENAME="${1##*/}"
+		#FILE="${FILENAME%.*}" 
+		#DIR=$(dirname "${1}")
+		#echo "$DIR"
+		#echo "$FILE"
+		convert $1 ~/.config/awesome/themes/default/wallpaper.png 
+		#cp $1 ~/.config/awesome/themes/default/
+	elif [[ $1 == *.jpeg ]] 
+		then
+		#mv $1 "~/.config/awesome/themes/default/
+		convert $1 ~/.config/awesome/themes/default/wallpaper.png 
+		#echo ".jpeg"
+	else 
+		echo "File is not a jpg, png or jpeg"
+	fi
+else
+	echo "Not enough paramaters. Please specify a file location"
+fi

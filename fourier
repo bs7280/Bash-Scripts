@@ -1,0 +1,4 @@
+#!/bin/bash
+#script to connect to bshaughn@fourier.cs.iit.edu
+
+ssh bshaughn@fourier.cs.iit.edu

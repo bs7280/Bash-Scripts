@@ -1,0 +1,16 @@
+#!/bin/bash
+#script to CD to my private dropbox and open vim with the file name
+
+cd ~/Dropbox/Ubuntu/scripts;
+if [ -z "$1" ];
+then
+        echo "Error: You did not specify a file name\n";
+else
+        #check if file exists as a script!!! I will add a sepearte bash script for editing bash scripts
+        if hash $1 2>/dev/null; then
+                vim $1;
+	else 
+		echo "That script does not exist"
+        fi
+fi
+

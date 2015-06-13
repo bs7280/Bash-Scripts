@@ -1,0 +1,4 @@
+#!/bin/bash
+#In the future this will print out a description of each script
+cd ~/Dropbox/Ubuntu/scripts
+ls
