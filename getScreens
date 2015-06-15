@@ -1,0 +1,46 @@
+#!/bin/bash
+#Input: getScreens videoName numbScreens
+
+if [ -z $1 ] || [ -z $2 ]
+then
+  echo Please give a video and a number of frames in the parameter
+else
+  videoName="$1"
+  (( numbScreens=$2 ))
+  outputImageName="$3"
+
+  #Checking if the output file variable is empty, and giving a value to the name if it is
+  if [ -z "$outputImageName" ]
+  then
+    outputImageName="screenshot"
+  fi
+
+  #Getting the length of the video
+  ff=$(ffmpeg -i "$videoName" 2>&1)
+  d="${ff#*Duration: }"
+  time="${d%%,*}"
+  IFS=':' read -ra ADDR <<< "$time"
+
+  #Converting the seconds place of the time to an integer
+  ADDR[2]=${ADDR[2]%.*}
+
+  #Gets the number of seconds in video, and drops the decimal
+  seconds=$(ffmpeg -i "$videoName" 2>&1 | grep "Duration"| cut -d ' ' -f 4 | sed s/,// | sed 's@\..*@@g' | awk '{ split($1, A, ":"); split(A[3], B, "."); print 3600*A[1] + 60*A[2] + B[1] }')
+  seconds=${seconds%.*}
+
+  #getting the frame rate
+  fps=$(ffmpeg -i "$videoName" 2>&1 | sed -n "s/.*, \(.*\) fp.*/\1/p")
+
+  #getting fps to enter into command below
+  enterFPS="$numbScreens"/"$seconds"
+  (( startPoint=$seconds/$numbScreens - 1))
+  startPoint=${startPoint%.*}
+
+  #getting the screenshots
+  if [ $startPoint > 0 ]
+  then
+      (ffmpeg -i "$videoName" -ss $startPoint -vf fps=$enterFPS "$outputImageName"%03d.jpeg)
+  else
+      (ffmpeg -i "$videoName" -vf fps=$enterFPS "$outputImageName"%03d.jpeg)
+  fi
+fi

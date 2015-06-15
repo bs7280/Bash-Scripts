@@ -1,0 +1,31 @@
+#!/bin/bash
+#takes in parameters: video file location, number of images in collage (default: 9)
+#will return a collage of the screenshots from the video.
+if [ -z "$1" ]
+then
+  echo Please enter a video as a parameter
+else
+    #Setting numberOfImages
+    if [ -z "$2" ]
+    then
+      numberOfImages=9
+    else
+      numberOfImages="$2"
+    fi
+
+    #Setting videoName = first parameter
+    videoName="$1"
+
+    #Getting the name of the video without the extension
+    noExtensionName=${videoName%.*}
+    noExtensionName=$noExtensionName
+
+    #creating the set of images
+    getScreens "$videoName" $numberOfImages screen-"$noExtensionName"
+
+    #getting the collage of images with the format: videoname-collage-numImages
+    montage -mode concatenate screen-"$noExtensionName"*.jpeg "$noExtensionName"-collage-"$numberOfImages".jpeg
+
+    #deleting the newly created photos
+    rm screen-"$noExtensionName"*.jpeg
+fi
